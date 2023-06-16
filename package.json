@@ -1,7 +1,7 @@
 {
   "private": false,
-  "name": "discordjs-decorators",
-  "version": "1.0.1",
+  "name": "@idkncc/discordjs-decorators",
+  "version": "1.0.3",
   "description": "Useful decorators for DiscordJS",
   "license": "MIT",
   "author": "idkncc",
