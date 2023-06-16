@@ -1,0 +1,27 @@
+# out
+build
+dist
+
+# deps
+node_modules
+
+# misc
+connect.lock
+coverage/*
+report_*
+reports/
+*.log
+.env
+
+*~
+*.orig
+.vagrant
+
+# jetbrains
+.idea
+
+# os
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini

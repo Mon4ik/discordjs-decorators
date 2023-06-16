@@ -1,0 +1,5 @@
+{
+  "ignore": ["dist", "example"],
+  "ext": "*",
+  "exec": "rimraf dist/ && tsc"
+}

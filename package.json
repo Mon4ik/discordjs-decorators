@@ -1,0 +1,28 @@
+{
+  "private": false,
+  "name": "discordjs-decorators",
+  "version": "1.0.0",
+  "description": "Useful decorators for DiscordJS",
+  "license": "MIT",
+  "author": "idkncc",
+  "repository": {
+    "url": "https://github.com/Mon4ik/discordjs-decorators"
+  },
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/lodash": "^4.14.195",
+    "discord.js": "^14.11.0",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "core-js": "^3.30.2",
+    "glob": "^10.2.6",
+    "lodash": "^4.17.21"
+  }
+}
