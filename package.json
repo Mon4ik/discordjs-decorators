@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@idkncc/discordjs-decorators",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Useful decorators for DiscordJS",
   "license": "MIT",
   "author": "idkncc",
@@ -9,9 +9,7 @@
     "url": "https://github.com/Mon4ik/discordjs-decorators"
   },
   "main": "dist/index.js",
-  "exports": {
-    ".": "./dist/index.js"
-  },
+  "files": ["dist/**/*"],
   "devDependencies": {
     "@types/glob": "^8.1.0",
     "@types/lodash": "^4.14.195",
