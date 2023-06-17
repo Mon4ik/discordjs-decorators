@@ -18,26 +18,14 @@ import {
 	SelectMenuSymbol,
 	SlashCommandSymbol
 } from "../utils";
-import {SlashCommandFactory} from "./factories";
+import {GeneralFactory, SlashCommandFactory} from "./factories";
 
 export type ValueOrValidator<T> = T | ((value: T) => boolean)
 export type ValueOrValidatorDiff<T, V> = T | ((value: V) => boolean)
 type Builder<T> = (builder: T) => T
 
-export function SlashCommand(builder?: SlashCommandBuilder): any {
-	return (target, key) => {
-		Reflect.defineMetadata(
-			'methods',
-			_.defaultsDeep(Reflect.getMetadata("methods", target), {
-				[key]: {
-					type: SlashCommandSymbol,
-					builder: builder ?? new SlashCommandBuilder()
-				}
-			}),
-			target
-		)
-	}
-}
+
+export const SlashCommand = (builder: SlashCommandBuilder) => GeneralFactory(AutocompleteSymbol, {builder})
 
 SlashCommand.Name = function (name: string) {
 	return SlashCommandFactory<SlashCommandBuilder>((builder) => builder.setName(name))
@@ -67,82 +55,15 @@ SlashCommand.ChannelOption = function (opt: Builder<SlashCommandChannelOption>) 
 	return SlashCommandFactory<SlashCommandBuilder>((builder) => builder.addChannelOption(opt))
 }
 
+// other decorators:
 
-export function ContextMenu(name: string, type: ContextMenuCommandType): PropertyDecorator {
-	return (target, key) => {
-		Reflect.defineMetadata(
-			'methods',
-			_.defaultsDeep(Reflect.getMetadata("methods", target), {
-				[key]: {
-					type: ContextMenuSymbol,
-					builder: new ContextMenuCommandBuilder()
-						.setName(name)
-						.setType(type)
-				}
-			}),
-			target
-		)
-	}
-}
+export const ContextMenu = (name: string, type: ContextMenuCommandType) => GeneralFactory(ContextMenuSymbol, {
+	builder: new ContextMenuCommandBuilder()
+		.setName(name)
+		.setType(type)
+})
+export const Autocomplete = (commandName: string) => GeneralFactory(AutocompleteSymbol, {commandName})
+export const Button = (customId: ValueOrValidatorDiff<string, ButtonInteraction>) => GeneralFactory(ButtonSymbol, {customId})
 
-export function Autocomplete(commandName: string): PropertyDecorator {
-	return (target, key) => {
-		Reflect.defineMetadata(
-			'methods',
-			_.defaultsDeep(Reflect.getMetadata("methods", target), {
-				[key]: {type: AutocompleteSymbol, commandName}
-			}),
-			target
-		)
-	}
-}
-
-export function Button(customId: ValueOrValidatorDiff<string, ButtonInteraction>): PropertyDecorator {
-	return (target, key) => {
-		Reflect.defineMetadata(
-			'methods',
-			_.defaultsDeep(Reflect.getMetadata("methods", target), {
-				[key]: {type: ButtonSymbol, customId}
-			}),
-			target
-		)
-	}
-}
-
-export function SelectMenu(customId: ValueOrValidatorDiff<string, SelectMenuInteraction>): PropertyDecorator {
-	return (target, key) => {
-		Reflect.defineMetadata(
-			'methods',
-			_.defaultsDeep(Reflect.getMetadata("methods", target), {
-				[key]: {type: SelectMenuSymbol, customId}
-			}),
-			target
-		)
-	}
-}
-
-export function Event(name: string, once: boolean = false): PropertyDecorator {
-	return (target, key) => {
-		Reflect.defineMetadata(
-			'methods',
-			_.defaultsDeep(Reflect.getMetadata("methods", target), {
-				[key]: {type: EventSymbol, name, once}
-			}),
-			target
-		)
-	}
-}
-
-export function Catch<T>(onerror: (error: any, ctx: T) => void) {
-	return (target, key) => {
-		Reflect.defineMetadata(
-			'methods',
-			_.defaultsDeep(Reflect.getMetadata("methods", target) ?? {}, {
-				[key]: {
-					onerror
-				}
-			}),
-			target
-		)
-	}
-}
+export const SelectMenu = (customId: ValueOrValidatorDiff<string, SelectMenuInteraction>) => GeneralFactory(SelectMenuSymbol, {customId})
+export const Event = (name: string, once: boolean = false) => GeneralFactory(EventSymbol, {name, once})

@@ -15,13 +15,17 @@ DiscordJS decorators for better structure
    ```shell
    yarn add @idkncc/discordjs-decorators
    ```
-3. Use it :D
+3. Add to `tsconfig.json`
+   ```json
+   "experimentalDecorators": true
+   ```
+4. Ready to use
 
 ## Simplest Example
 
 ```ts
 // index.ts
-import {EventLoader, importGlob} from "..";
+import {EventLoader, importGlob} from "@idkncc/discordjs-decorators";
 import {Client, Events} from "discord.js";
 
 require("dotenv").config()
@@ -48,8 +52,8 @@ client.login(process.env.TOKEN)
 
 ```ts
 // /events/event.ts
-import {Events} from "discord.js";
-import {Event} from "@idkncc/discordjs-decorators";
+import {Events} from "discord.js"
+import {Event} from "@idkncc/discordjs-decorators"
 
 export class ExampleEventImportedOne {
 	// regular event
